@@ -1,8 +1,8 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Home from './Home';
-import Login from './Login';
-import Sign from './Sign';
+import Login from '../auth/Login'
+import Sign from '../auth/Sign';
 function Page({isLogin}) {
   return (
     <Routes>
