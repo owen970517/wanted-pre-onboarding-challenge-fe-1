@@ -2,9 +2,17 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Link, useNavigate } from 'react-router-dom';
 
-function Header({isLogin}) {
+function Header() {
+  const [isLogin, setIsLogin] = useState(false);
+  const user = localStorage.getItem('preonboarding');
+  useEffect(() => {
+    if (user) {
+      setIsLogin(true);
+    } else {
+      setIsLogin(false);
+    }
+  }, [user]);
   const nav = useNavigate();
-  const [user , setUser]= useState(false);
   const onLogOut = () => {
     localStorage.removeItem('preonboarding');
     nav('/login');
