@@ -11,7 +11,7 @@ function App() {
     } else {
       setIsLogin(false);
     }
-  }, []);
+  }, [isLogin]);
   return (
     <>
       <BrowserRouter>

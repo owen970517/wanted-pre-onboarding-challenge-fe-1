@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 
 function Header({isLogin}) {
   const nav = useNavigate();
+  const [user , setUser]= useState(false);
   const onLogOut = () => {
     localStorage.removeItem('preonboarding');
     nav('/login');

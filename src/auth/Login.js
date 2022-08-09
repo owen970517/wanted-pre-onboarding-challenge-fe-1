@@ -4,14 +4,12 @@ import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
 function Login() {
-  const [user,setUser] = useState({});
   const nav = useNavigate();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  console.log(user);
   const onSubmit = async (props) => {
     fetch('http://localhost:8080/users/login' , {
       method : 'POST' ,
