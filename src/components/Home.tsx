@@ -6,8 +6,17 @@ import { IToDo } from '../types/todo';
 
 function Home() {
   const [todos , setTodos] = useState([]);
+  const [isLogin, setIsLogin] = useState(false);
+  const user = localStorage.getItem('preonboarding');
   const nav = useNavigate();
   let token = localStorage.getItem('preonboarding') || '';
+  useEffect(() => {
+    if (user) {
+      setIsLogin(true);
+    } else {
+      setIsLogin(false);
+    }
+  }, [user]);
   const {register , handleSubmit , setValue} = useForm<IToDo>();
   const onSubmit =  (props : IToDo) => {
     fetch('http://localhost:8080/todos' , {
@@ -50,7 +59,8 @@ function Home() {
   }
   return (
     <div>
-      <Wrapper onSubmit={handleSubmit(onSubmit)}>
+      {isLogin &&      
+       <Wrapper onSubmit={handleSubmit(onSubmit)}>
         <Input type='text'
               {...register('title', {
                 required: true,
@@ -66,9 +76,9 @@ function Home() {
               placeholder='content'
         ></Input>
         <button>추가</button>
-      </Wrapper>
+      </Wrapper>}
       <ToDoList>
-        {todos.map((todo : IToDo) => {
+        {isLogin ? todos.map((todo : IToDo) => {
           return (
             <ToDo key={todo.id}>
               <h2>제목 : {todo.title}</h2>
@@ -79,7 +89,10 @@ function Home() {
               </Buttons>
             </ToDo>
           )
-        })}
+        }) : 
+        <>
+          <h1>로그인을 해야 사용가능합니다.</h1>
+        </>}
       </ToDoList>
     </div>
   );
