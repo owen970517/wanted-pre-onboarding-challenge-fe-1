@@ -9,19 +9,20 @@ import { IToDo } from '../types/todo';
 const Modify = () => {
     const params = useParams();
     const nav = useNavigate();
-    const [todo , setTodo] = useState({});
-    const {register , handleSubmit} = useForm<IToDo>();
+    const [todo , setTodo] = useState<IToDo>();
+    const {register , handleSubmit ,setValue} = useForm<IToDo>();
+    setValue('title' , todo?.title)
+    setValue('content' , todo?.content)
     let token = localStorage.getItem('preonboarding') || '';
     useEffect(() => {
-        fetch('http://localhost:8080/todos/'+params.id  , {
-          method : 'GET' , 
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization" : token       
-          },
-        }).then(response => response.json()).then((data) => setTodo(data.data));
-      },[token ,params.id])
-    console.log(todo);
+      fetch('http://localhost:8080/todos/'+params.id  , {
+        method : 'GET' , 
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization" : token       
+        },
+      }).then(response => response.json()).then(data => setTodo(data.data));
+      },[params.id , token])
     const onSubmit = (props:IToDo) => {
         fetch('http://localhost:8080/todos/'+ params.id , {
             method : 'PUT' ,
@@ -33,7 +34,7 @@ const Modify = () => {
               title : props.title,
               content : props.content
             })
-          }).then(response => response.json()).then(data=> console.log(data));
+          }).then(response => response.json())
         nav('/')
     }
   return ( 
