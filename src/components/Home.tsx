@@ -1,16 +1,15 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { IoIosMore } from 'react-icons/io';
-import { FaRegCommentDots } from 'react-icons/fa';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
+import { IToDo } from '../types/todo';
 
 function Home() {
   const [todos , setTodos] = useState([]);
   const nav = useNavigate();
   let token = localStorage.getItem('preonboarding') || '';
-  const {register , handleSubmit} = useForm();
-  const onSubmit =  (props) => {
+  const {register , handleSubmit} = useForm<IToDo>();
+  const onSubmit =  (props : IToDo) => {
     fetch('http://localhost:8080/todos' , {
       method : 'POST' , 
       headers: {
@@ -32,7 +31,7 @@ function Home() {
       }
     }).then((response) => response.json()).then((data)=> setTodos(data.data));
   },[ token, todos ])
-  const onDelete = (id) => {
+  const onDelete = (id:IToDo) => {
     console.log(id) 
     fetch('http://localhost:8080/todos/' + id , {
       method : 'DELETE' , 
@@ -42,12 +41,12 @@ function Home() {
       }
     })
   }
-  const onModify = (id) => {
+  const onModify = (id : IToDo) => {
     nav('/modify/' + id)
   }
   return (
     <div>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <Wrapper onSubmit={handleSubmit(onSubmit)}>
         <Input type='text'
               {...register('title', {
                 required: true,
@@ -63,14 +62,17 @@ function Home() {
               placeholder='content'
         ></Input>
         <button>추가</button>
-      </form>
+      </Wrapper>
       <ToDoList>
-        {todos.map((todo) => {
+        {todos.map((todo : IToDo) => {
           return (
             <ToDo key={todo.id}>
-              <h2>{todo.content}</h2>
-              <button onClick={()=> { onModify(todo.id)}}>수정하기</button>
-              <button onClick={()=> { onDelete(todo.id)}}>삭제하기</button>
+              <h2>제목 : {todo.title}</h2>
+              <h2>내용 : {todo.content}</h2>
+              <Buttons>
+                <button onClick={()=> { onModify(todo.id)}}>수정하기</button>
+                <button onClick={()=> { onDelete(todo.id)}}>삭제하기</button>
+              </Buttons>
             </ToDo>
           )
         })}
@@ -78,6 +80,12 @@ function Home() {
     </div>
   );
 }
+
+const Wrapper = styled.form`
+  display : flex;
+  justify-content: center;
+  align-items : center;
+`
 const Input = styled.input`
   border: 1px solid black;
   margin: 10px 10px;
@@ -91,8 +99,13 @@ const ToDoList = styled.div`
 `
 const ToDo = styled.div`
   display:flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   padding : 10px;
+`
+const Buttons = styled.div`
+  display : flex;
+  margin-top : 10px;
 `
 export default Home;

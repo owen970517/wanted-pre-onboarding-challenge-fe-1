@@ -1,34 +1,17 @@
-import { React, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
+import { IForm } from '../types/user';
 
-function Login() {
+const Sign = () => {
   const nav = useNavigate();
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
-  const onSubmit = async (props) => {
-    fetch('http://localhost:8080/users/login' , {
-      method : 'POST' ,
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body : JSON.stringify({
-        email : props.id,
-        password : props.password
-      })
-    }).then((response) => response.json()).then((data) => {
-      console.log(data);
-      localStorage.setItem(
-        'preonboarding',
-        JSON.stringify({
-          token : data.token
-        })); 
-    }) 
-/*     const response = await fetch('http://localhost:8080/users/login' , {
+  } = useForm<IForm>();
+  const onSubmit = async (props : IForm) => {
+    const response = await fetch('http://localhost:8080/users/create' , {
       method : 'POST' , 
       headers: {
         "Content-Type": "application/json",
@@ -39,18 +22,23 @@ function Login() {
       })
     })
     const data = response.json();
-    console.log(data); */
-    nav('/');
+    console.log(data);
+    nav('/login');
   };
   return (
     <Wrapper onSubmit={handleSubmit(onSubmit)}>
-      <h3>로그인 페이지</h3>
+      <h3>회원가입</h3>
       {errors.id ? (
         <Input
           style={{ border: '1px solid red' }}
           {...register('id', {
             required: true,
             maxLength: 30,
+            pattern: {
+              value:
+                /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i,
+              message: '올바른 이메일 형식을 입력하시오',
+            },
           })}
           type="text"
           placeholder="아이디"
@@ -60,6 +48,11 @@ function Login() {
           {...register('id', {
             required: true,
             maxLength: 30,
+            pattern: {
+              value:
+                /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i,
+              message: '올바른 이메일 형식을 입력하시오',
+            },
           })}
           type="text"
           placeholder="아이디"
@@ -72,6 +65,10 @@ function Login() {
           {...register('password', {
             required: true,
             minLength: 6,
+            pattern: {
+              value: /^(?=.*[A-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/,
+              message: '특수문자 , 대문자 , 숫자를 포함하시오',
+            },
           })}
           type="password"
           placeholder="비밀번호"
@@ -81,6 +78,10 @@ function Login() {
           {...register('password', {
             required: true,
             minLength: 6,
+            pattern: {
+              value: /^(?=.*[A-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/,
+              message: '특수문자 , 대문자 , 숫자를 포함하시오',
+            },
           })}
           type="password"
           placeholder="비밀번호"
@@ -89,7 +90,7 @@ function Login() {
       {errors.password && (
         <p style={{ color: 'red' }}>{errors.password.message}</p>
       )}
-      <button>로그인</button>
+      <button>가입하기</button>
     </Wrapper>
   );
 }
@@ -109,4 +110,5 @@ const Input = styled.input`
   padding: 10px;
 `;
 
-export default Login;
+
+export default Sign

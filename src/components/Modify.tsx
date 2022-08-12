@@ -2,12 +2,13 @@ import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form';
 import { useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
+import { IToDo } from '../types/todo';
 
 const Modify = () => {
     const params = useParams();
     const nav = useNavigate();
     const [todo , setTodo] = useState({});
-    const {register , handleSubmit} = useForm();
+    const {register , handleSubmit} = useForm<IToDo>();
     let token = localStorage.getItem('preonboarding') || '';
     useEffect(() => {
         fetch('http://localhost:8080/todos/'+params.id  , {
@@ -19,7 +20,7 @@ const Modify = () => {
         }).then(response => response.json()).then((data) => setTodo(data.data));
       },[token ,params.id])
       console.log(todo);
-    const onSubmit = (props) => {
+    const onSubmit = (props:IToDo) => {
         fetch('http://localhost:8080/todos/'+ params.id , {
             method : 'PUT' ,
             headers: {
@@ -41,13 +42,15 @@ const Modify = () => {
                 required: true,
                 minLength: 6,
                 })} 
-                type='text'></Input>
+                type='text'
+                placeholder='title'></Input>
             <Input
                 {...register('content', {
                 required: true,
                 minLength: 6,
                 })}
-                type='text'></Input>
+                type='text'
+                placeholder='content'></Input>
             <button>
                 수정완료
             </button>

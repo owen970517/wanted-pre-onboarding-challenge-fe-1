@@ -1,18 +1,18 @@
-import { React, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
+import { IForm } from '../types/user';
 
-const Sign = () => {
+function Login() {
   const nav = useNavigate();
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
-  const onSubmit = async (props) => {
-    const response = await fetch('http://localhost:8080/users/create' , {
-      method : 'POST' , 
+  } = useForm<IForm>();
+  const onSubmit = async (props : IForm) => {
+    fetch('http://localhost:8080/users/login' , {
+      method : 'POST' ,
       headers: {
         "Content-Type": "application/json",
       },
@@ -20,20 +20,19 @@ const Sign = () => {
         email : props.id,
         password : props.password
       })
-    })
-    const data = response.json();
-    console.log(data);
-/*     localStorage.setItem(
-      'preonboarding',
-      JSON.stringify({
-        token : data.token
-      })
-    );  */
-    nav('/login');
+    }).then((response) => response.json()).then((data) => {
+      console.log(data);
+      localStorage.setItem(
+        'preonboarding',
+        JSON.stringify({
+          token : data.token
+        })); 
+    }) 
+    nav('/');
   };
   return (
     <Wrapper onSubmit={handleSubmit(onSubmit)}>
-      <h3>회원가입</h3>
+      <h3>로그인 페이지</h3>
       {errors.id ? (
         <Input
           style={{ border: '1px solid red' }}
@@ -96,7 +95,7 @@ const Sign = () => {
       {errors.password && (
         <p style={{ color: 'red' }}>{errors.password.message}</p>
       )}
-      <button>가입하기</button>
+      <button>로그인</button>
     </Wrapper>
   );
 }
@@ -116,5 +115,4 @@ const Input = styled.input`
   padding: 10px;
 `;
 
-
-export default Sign
+export default Login;

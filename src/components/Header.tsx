@@ -64,14 +64,6 @@ const LI = styled.li`
   font-size: 30px;
 `;
 
-const Input = styled.input`
-  border: 1px solid black;
-  padding: 10px;
-  @media screen and (max-width: 960px) {
-    display: none;
-  }
-`;
-
 const StyledLink = styled(Link)`
   margin-right: 10px;
   text-decoration: none;
