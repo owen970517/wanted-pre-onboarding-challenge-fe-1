@@ -4,6 +4,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { IToDo } from '../types/todo';
 
+
+
 const Modify = () => {
     const params = useParams();
     const nav = useNavigate();
@@ -19,7 +21,7 @@ const Modify = () => {
           },
         }).then(response => response.json()).then((data) => setTodo(data.data));
       },[token ,params.id])
-      console.log(todo);
+    console.log(todo);
     const onSubmit = (props:IToDo) => {
         fetch('http://localhost:8080/todos/'+ params.id , {
             method : 'PUT' ,

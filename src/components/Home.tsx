@@ -8,7 +8,7 @@ function Home() {
   const [todos , setTodos] = useState([]);
   const nav = useNavigate();
   let token = localStorage.getItem('preonboarding') || '';
-  const {register , handleSubmit} = useForm<IToDo>();
+  const {register , handleSubmit , setValue} = useForm<IToDo>();
   const onSubmit =  (props : IToDo) => {
     fetch('http://localhost:8080/todos' , {
       method : 'POST' , 
@@ -21,6 +21,8 @@ function Home() {
         content : props.content
       })
     }).then((response) => { response.json()}).then((data) => {console.log(data)});
+    setValue('title' , '');
+    setValue('content','');
   }
   useEffect(() => {
     fetch('http://localhost:8080/todos' , {
@@ -31,15 +33,17 @@ function Home() {
       }
     }).then((response) => response.json()).then((data)=> setTodos(data.data));
   },[ token, todos ])
-  const onDelete = (id:IToDo) => {
-    console.log(id) 
-    fetch('http://localhost:8080/todos/' + id , {
-      method : 'DELETE' , 
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization" : token,
-      }
-    })
+  const onDelete = async (id:IToDo) => {
+    const ok = window.confirm("정말 삭제하시겠습니까??");
+    if (ok) {
+      await fetch('http://localhost:8080/todos/' + id , {
+        method : 'DELETE' , 
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization" : token,
+        }
+      })
+    } 
   }
   const onModify = (id : IToDo) => {
     nav('/modify/' + id)
