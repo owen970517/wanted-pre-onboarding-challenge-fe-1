@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
+import { getToDoById, modifyToDo } from '../api';
 import { IToDo } from '../types/todo';
 
 
@@ -9,33 +11,31 @@ import { IToDo } from '../types/todo';
 const Modify = () => {
     const params = useParams();
     const nav = useNavigate();
-    const [todo , setTodo] = useState<IToDo>();
+    //const [todo , setTodo] = useState<IToDo>();
     const {register , handleSubmit ,setValue} = useForm<IToDo>();
-    setValue('title' , todo?.title)
-    setValue('content' , todo?.content)
+    const {data}= useQuery('todo' , () => getToDoById(params.id as string))
+    setValue('title' , data?.data.title)
+    setValue('content' , data?.data.content)
     let token = localStorage.getItem('preonboarding') || '';
-    useEffect(() => {
-      fetch('http://localhost:8080/todos/'+params.id  , {
-        method : 'GET' , 
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization" : token       
-        },
-      }).then(response => response.json()).then(data => setTodo(data.data));
-      },[params.id , token])
+  //  const mutation = useMutation(  modifyToDo , {
+  //    onSuccess: () => {
+  //      nav('/');
+  //    },
+  //  });
     const onSubmit = (props:IToDo) => {
-        fetch('http://localhost:8080/todos/'+ params.id , {
-            method : 'PUT' ,
-            headers: {
-              "Content-Type": "application/json",
-              "Authorization" : token
-            },
-            body : JSON.stringify({
-              title : props.title,
-              content : props.content
-            })
-          }).then(response => response.json())
-        nav('/')
+      // mutation.mutate({id : params.id , title : props.title , content : props.content})
+     fetch('http://localhost:8080/todos/'+ params.id , {
+         method : 'PUT' ,
+         headers: {
+           "Content-Type": "application/json",
+           "Authorization" : token
+         },
+         body : JSON.stringify({
+           title : props.title,
+           content : props.content
+         })
+       }).then(response => response.json())
+       nav('/')
     }
   return ( 
     <div>

@@ -2,6 +2,8 @@ import styled from 'styled-components';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { IForm } from '../types/user';
+import { useMutation, useQuery } from 'react-query';
+import { postLogin } from '../api';
 
 function Login() {
   const nav = useNavigate();
@@ -10,24 +12,13 @@ function Login() {
     handleSubmit,
     formState: { errors },
   } = useForm<IForm>();
-  const onSubmit = async (props : IForm) => {
-   await fetch('http://localhost:8080/users/login' , {
-      method : 'POST' ,
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body : JSON.stringify({
-        email : props.id,
-        password : props.password
-      })
-    }).then((response) => response.json()).then((data) => {
-        localStorage.setItem(
-          'preonboarding',
-          JSON.stringify({
-            token : data.token
-          })); 
-    }) 
-    nav('/');
+  const addUserMutation = useMutation(postLogin ,{
+    onSuccess : () => {
+      nav('/');
+    }
+  })
+  const onSubmit = async (props :IForm) => {
+    addUserMutation.mutate({id : props.id , password : props.password ,})
   };
   return (
     <Wrapper onSubmit={handleSubmit(onSubmit)}>

@@ -2,6 +2,8 @@ import styled from 'styled-components';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { IForm } from '../types/user';
+import { useMutation } from 'react-query';
+import { createUser } from '../api';
 
 const Sign = () => {
   const nav = useNavigate();
@@ -10,20 +12,13 @@ const Sign = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<IForm>();
-  const onSubmit = async (props : IForm) => {
-    const response = await fetch('http://localhost:8080/users/create' , {
-      method : 'POST' , 
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body : JSON.stringify({
-        email : props.id,
-        password : props.password
-      })
-    })
-    const data = response.json();
-    console.log(data);
-    nav('/login');
+  const CreateUser = useMutation(createUser , {
+    onSuccess : () => {
+      nav('/login');
+    }
+  })
+  const onSubmit = (props : IForm) => {
+    CreateUser.mutate({id : props.id , password : props.password})
   };
   return (
     <Wrapper onSubmit={handleSubmit(onSubmit)}>

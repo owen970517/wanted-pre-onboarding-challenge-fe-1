@@ -33,7 +33,7 @@ function Home() {
     }
   }, [user]);
   const onSubmit =  (props : IToDo) => {
-    Addmutation.mutate({ title : props.title , content : props.content , ...props})
+    Addmutation.mutate({ title : props.title , content : props.content })
   }
   const onDelete = (id:IToDo) => {
     DeleteMutation.mutate(id);
