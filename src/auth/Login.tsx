@@ -11,7 +11,7 @@ function Login() {
     formState: { errors },
   } = useForm<IForm>();
   const onSubmit = async (props : IForm) => {
-    fetch('http://localhost:8080/users/login' , {
+   await fetch('http://localhost:8080/users/login' , {
       method : 'POST' ,
       headers: {
         "Content-Type": "application/json",
@@ -21,12 +21,11 @@ function Login() {
         password : props.password
       })
     }).then((response) => response.json()).then((data) => {
-      console.log(data);
-      localStorage.setItem(
-        'preonboarding',
-        JSON.stringify({
-          token : data.token
-        })); 
+        localStorage.setItem(
+          'preonboarding',
+          JSON.stringify({
+            token : data.token
+          })); 
     }) 
     nav('/');
   };

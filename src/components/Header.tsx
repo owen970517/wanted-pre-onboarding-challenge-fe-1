@@ -20,7 +20,7 @@ function Header() {
 
   return (
     <Wrapper>
-      <Title>Logo</Title>
+      <Title>My ToDo</Title>
       <UL>
         <LI>
           <StyledLink to="/">Home</StyledLink>

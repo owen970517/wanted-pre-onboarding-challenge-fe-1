@@ -3,13 +3,28 @@ import styled from 'styled-components';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { IToDo } from '../types/todo';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
+import { deleteToDo, getToDos, postToDos } from '../api';
 
 function Home() {
-  const [todos , setTodos] = useState([]);
   const [isLogin, setIsLogin] = useState(false);
   const user = localStorage.getItem('preonboarding');
+  const {register , handleSubmit , setValue } = useForm<IToDo>();
+  const {data:myToDos , isLoading } = useQuery('todos' , getToDos);
+  const queryClient = useQueryClient();
+  const Addmutation = useMutation(postToDos, {
+    onSuccess: () => {
+      queryClient.invalidateQueries('todos');
+      setValue('title','');
+      setValue('content','');
+    },
+  });
+  const DeleteMutation = useMutation(deleteToDo , {
+    onSuccess : () => {
+      queryClient.invalidateQueries('todos');
+    }
+  })
   const nav = useNavigate();
-  let token = localStorage.getItem('preonboarding') || '';
   useEffect(() => {
     if (user) {
       setIsLogin(true);
@@ -17,42 +32,11 @@ function Home() {
       setIsLogin(false);
     }
   }, [user]);
-  const {register , handleSubmit , setValue} = useForm<IToDo>();
   const onSubmit =  (props : IToDo) => {
-    fetch('http://localhost:8080/todos' , {
-      method : 'POST' , 
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization" : token,
-      },
-      body : JSON.stringify({
-        title : props.title,
-        content : props.content
-      })
-    }).then((response) => { response.json()}).then((data) => {console.log(data)});
-    setValue('title' , '');
-    setValue('content','');
+    Addmutation.mutate({ title : props.title , content : props.content , ...props})
   }
-  useEffect(() => {
-    fetch('http://localhost:8080/todos' , {
-      method : 'GET' , 
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization" : token,
-      }
-    }).then((response) => response.json()).then((data)=> setTodos(data.data));
-  },[ token, todos ])
-  const onDelete = async (id:IToDo) => {
-    const ok = window.confirm("정말 삭제하시겠습니까??");
-    if (ok) {
-      await fetch('http://localhost:8080/todos/' + id , {
-        method : 'DELETE' , 
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization" : token,
-        }
-      })
-    } 
+  const onDelete = (id:IToDo) => {
+    DeleteMutation.mutate(id);
   }
   const onModify = (id : IToDo) => {
     nav('/modify/' + id)
@@ -78,7 +62,7 @@ function Home() {
         <button>추가</button>
       </Wrapper>}
       <ToDoList>
-        {isLogin ? todos.map((todo : IToDo) => {
+        {isLogin ? myToDos?.data.map((todo : IToDo) => {
           return (
             <ToDo key={todo.id}>
               <h2>제목 : {todo.title}</h2>
