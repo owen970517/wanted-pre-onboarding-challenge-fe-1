@@ -12,14 +12,23 @@ function Login() {
     handleSubmit,
     formState: { errors },
   } = useForm<IForm>();
-  const addUserMutation = useMutation(postLogin ,{
-    onSuccess : () => {
-      nav('/');
-    }
+  const loginUserMutation = useMutation(postLogin ,{
+    onSuccess : (data) => {
+        if (data.token) {
+          localStorage.setItem(
+            'preonboarding',
+            JSON.stringify({
+              token: data.token
+            }));
+          nav('/');
+        } else {
+          window.alert('해당 토큰이 존재하지 않습니다.');
+        }
+    }, 
   })
-  const onSubmit = async (props :IForm) => {
-    addUserMutation.mutate({id : props.id , password : props.password ,})
-  };
+  const onSubmit = (props :IForm) => {
+      loginUserMutation.mutate({ id: props.id, password: props.password });
+  }
   return (
     <Wrapper onSubmit={handleSubmit(onSubmit)}>
       <h3>로그인 페이지</h3>

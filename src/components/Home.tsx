@@ -62,6 +62,7 @@ function Home() {
         <button>추가</button>
       </Wrapper>}
       <ToDoList>
+        {isLoading && <h1>Loading...</h1>}
         {isLogin ? myToDos?.data.map((todo : IToDo) => {
           return (
             <ToDo key={todo.id}>

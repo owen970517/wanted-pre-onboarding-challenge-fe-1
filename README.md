@@ -14,6 +14,11 @@
 ## 1-2주차 과제
 
 - React-Query를 사용하여 api 데이터를 fetch 했습니다.
-- useEffect, useState를 사용하지 않아도 되기 때문에 코드의 양이 줄었습니다.
-- isloading, isError, isFetching 같은 동작의 상태에 대한 값을 갖고 있어서 편합니다.
+- React-Query의 useMutataion을 사용해서 update, delete, create를 다루었습니다.
+
+## React-Query를 사용하며 느낀점 
+
+- useEffect, useState를 사용하지 않아도 되기 때문에 코드의 양이 줄일 수 있었습니다.
+- isloading, isError, isFetching 같은 동작의 상태에 대한 값을 갖고 있어서 기능을 구현하기 편합니다.
+
 
