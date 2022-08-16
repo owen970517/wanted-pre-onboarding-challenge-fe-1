@@ -11,31 +11,17 @@ import { IToDo } from '../types/todo';
 const Modify = () => {
     const params = useParams();
     const nav = useNavigate();
-    //const [todo , setTodo] = useState<IToDo>();
     const {register , handleSubmit ,setValue} = useForm<IToDo>();
     const {data}= useQuery('todo' , () => getToDoById(params.id as string))
     setValue('title' , data?.data.title)
     setValue('content' , data?.data.content)
-    let token = localStorage.getItem('preonboarding') || '';
-  //  const mutation = useMutation(  modifyToDo , {
-  //    onSuccess: () => {
-  //      nav('/');
-  //    },
-  //  });
+    const mutation = useMutation(  modifyToDo , {
+      onSuccess: () => {
+        nav('/');
+      },
+    });
     const onSubmit = (props:IToDo) => {
-      // mutation.mutate({id : params.id , title : props.title , content : props.content})
-     fetch('http://localhost:8080/todos/'+ params.id , {
-         method : 'PUT' ,
-         headers: {
-           "Content-Type": "application/json",
-           "Authorization" : token
-         },
-         body : JSON.stringify({
-           title : props.title,
-           content : props.content
-         })
-       }).then(response => response.json())
-       nav('/')
+      mutation.mutate({id : params.id , title : props.title , content : props.content})
     }
   return ( 
     <div>

@@ -83,8 +83,8 @@ export const getToDoById = (id:string) => {
   }).then(response => response.json())
 }
 
-export const modifyToDo = (id : string, props:IToDo) => {
-  return fetch('http://localhost:8080/todos/'+ id , {
+export const modifyToDo = ( props:IToDo) => {
+  return fetch('http://localhost:8080/todos/'+ props.id , {
     method : 'PUT' ,
     headers: {
       "Content-Type": "application/json",
