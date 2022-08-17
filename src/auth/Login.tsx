@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { IForm } from '../types/user';
-import { useMutation, useQuery } from 'react-query';
+import { useMutation } from 'react-query';
 import { postLogin } from '../api';
 
 function Login() {
@@ -21,8 +21,6 @@ function Login() {
               token: data.token
             }));
           nav('/');
-        } else {
-          window.alert('해당 토큰이 존재하지 않습니다.');
         }
     }, 
   })
@@ -40,7 +38,7 @@ function Login() {
             maxLength: 30,
             pattern: {
               value:
-                /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i,
+                /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i,
               message: '올바른 이메일 형식을 입력하시오',
             },
           })}
@@ -54,7 +52,7 @@ function Login() {
             maxLength: 30,
             pattern: {
               value:
-                /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i,
+                /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i,
               message: '올바른 이메일 형식을 입력하시오',
             },
           })}

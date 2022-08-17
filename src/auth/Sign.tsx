@@ -15,6 +15,9 @@ const Sign = () => {
   const CreateUser = useMutation(createUser , {
     onSuccess : () => {
       nav('/login');
+    },
+    onError : () => {
+      console.log('이미 존재하는 이메일입니다.');
     }
   })
   const onSubmit = (props : IForm) => {
@@ -31,7 +34,7 @@ const Sign = () => {
             maxLength: 30,
             pattern: {
               value:
-                /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i,
+                /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i,
               message: '올바른 이메일 형식을 입력하시오',
             },
           })}
@@ -45,7 +48,7 @@ const Sign = () => {
             maxLength: 30,
             pattern: {
               value:
-                /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i,
+                /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i,
               message: '올바른 이메일 형식을 입력하시오',
             },
           })}

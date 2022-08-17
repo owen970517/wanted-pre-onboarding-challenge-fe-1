@@ -3,17 +3,18 @@ import { IForm } from "./types/user";
 
 let token = localStorage.getItem('preonboarding') || '';
 
-export const createUser = (props :IForm) => {
-  return fetch('http://localhost:8080/users/create' , {
-    method : 'POST' , 
+export const createUser = async (props :IForm) => {
+  const response = await fetch('http://localhost:8080/users/create', {
+    method: 'POST',
     headers: {
       "Content-Type": "application/json",
     },
-    body : JSON.stringify({
-      email : props.id,
-      password : props.password
+    body: JSON.stringify({
+      email: props.id,
+      password: props.password
     })
-  }).then(response => response.json())
+  });
+  return await response.json();
 }
 
 export const postLogin = async (props : IForm) => {
@@ -29,13 +30,6 @@ export const postLogin = async (props : IForm) => {
   });
   const data = await response.json();
   return data;
-  // if (data.token) {
-  //   localStorage.setItem(
-  //     'preonboarding',
-  //     JSON.stringify({
-  //       token: data.token
-  //     }));
-  // } 
 }
 
 export const getToDos =  async () => {
