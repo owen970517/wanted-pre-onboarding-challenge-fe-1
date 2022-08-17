@@ -20,14 +20,16 @@
 
 ## 사전 구현 과제
 
-| ------ | -- | -- |----------- |
-| Login / SignUp | /auth 경로에 로그인, 회원가입 기능 개발 | ☑️ | 
-| Login / SignUp | 이메일, 비밀번호에 대한 유효성 검사 | ☑️ |
-| Login / SignUp | 로그인 API 호출하고, 올바른 응답을 받았을 때 루트 경로로 이동 | ☑️ |
-| ToDo List | Todo List API를 호출하여 db에 존재하는 Todo 목록 보여주기 | ☑️ |
-| ToDo List | Todo List API를 호출하여 db에 Todo 추가하기 | ☑️ |
-| ToDo List | Todo List API를 호출하여 선택한 Todo 삭제하기 | ☑️ |
-| ToDo List | Todo List API를 호출하여 선택한 Todo 수정하기 | ☑️ |
+- /auth 경로에 로그인, 회원가입 기능 개발  ☑️ 
+- 이메일, 비밀번호에 대한 유효성 검사  ☑️ 
+- 로그인 API 호출하고, 올바른 응답을 받았을 때 루트 경로로 이동 |☑️ 
+
+ToDo List  
+
+- Todo List API를 호출하여 db에 존재하는 Todo 목록 보여주기 ☑️ 
+- Todo List API를 호출하여 db에 Todo 추가하기 ☑️ 
+- Todo List API를 호출하여 선택한 Todo 삭제하기 ☑️ 
+- Todo List API를 호출하여 선택한 Todo 수정하기  ☑️ 
 
 
 
