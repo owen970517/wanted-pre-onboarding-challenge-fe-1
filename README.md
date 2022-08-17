@@ -4,6 +4,33 @@
 - css는 styled components를 사용하였습니다.
 - todo를 추가, 삭제, 수정 기능을 구현했습니다.
 
+## 설치 방법 및 실행
+
+- git clone https://github.com/owen970517/wanted-pre-onboarding-challenge-fe-1.git
+- npm start
+
+## 사용한 라이브러리
+
+- ReactJS
+- TypeScript 
+- styled-components
+- React Query
+- react-hook-form (useForm)
+- react-router-dom
+
+## 사전 구현 과제
+
+| ------ | -- | -- |----------- |
+| Login / SignUp | /auth 경로에 로그인, 회원가입 기능 개발 | ☑️ | 
+| Login / SignUp | 이메일, 비밀번호에 대한 유효성 검사 | ☑️ |
+| Login / SignUp | 로그인 API 호출하고, 올바른 응답을 받았을 때 루트 경로로 이동 | ☑️ |
+| ToDo List | Todo List API를 호출하여 db에 존재하는 Todo 목록 보여주기 | ☑️ |
+| ToDo List | Todo List API를 호출하여 db에 Todo 추가하기 | ☑️ |
+| ToDo List | Todo List API를 호출하여 선택한 Todo 삭제하기 | ☑️ |
+| ToDo List | Todo List API를 호출하여 선택한 Todo 수정하기 | ☑️ |
+
+
+
 ## 1-1주차 과제 
 
 - 자바스크립트로 만든 프로젝트를 타입스크립트로 개선하였습니다.
