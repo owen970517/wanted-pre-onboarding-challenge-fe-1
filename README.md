@@ -38,15 +38,15 @@ ToDo List
 
 ## 1-1주차 과제 
 
-- 자바스크립트로 만든 프로젝트를 타입스크립트로 개선하였습니다.
-- todo 삭제 시 alert창을 띄워 정말 삭제할 것인지 확인하도록 만들었습니다.
-- 로그인 했을 때만 todolist를 생성할 수 있도록 만들었습니다.
-- todo 수정할 때 현재 값을 보여주도록 개선했습니다.
+- 자바스크립트로 만든 프로젝트를 타입스크립트로 개선
+- todo 삭제 시 alert창을 띄워 정말 삭제할 것인지 확인하도록 만듦
+- 로그인 했을 때만 todolist를 생성할 수 있도록 만듦
+- todo 수정할 때 현재 값을 보여주도록 개선
 
-## 1-2주차 과제
+## 1-2주차 과제 (React-Query를 사용하여 api호출)
 
-- React-Query를 사용하여 api 데이터를 fetch 했습니다.
-- React-Query의 useMutataion을 사용해서 update, delete, create를 다루었습니다.
+- React-Query를 사용하여 ToDo API 호출 
+- React-Query의 useMutataion을 사용해서 todo의 CRUD 구현
 
 ## 2-1주차 과제 
 
