@@ -2,8 +2,8 @@ import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Login from '../auth/Login'
 import Sign from '../auth/Sign';
-import Home from './Home';
-import Modify from './Modify';
+import Home from '../components/Home';
+import Modify from '../components/Modify';
 function Page() {
   return (
     <Routes>

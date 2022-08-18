@@ -7,6 +7,7 @@
 ## 설치 방법 및 실행
 
 - git clone https://github.com/owen970517/wanted-pre-onboarding-challenge-fe-1.git
+- npm install
 - npm start
 
 ## 사용한 라이브러리
@@ -22,9 +23,9 @@
 
 Login / SignUp 
 
-- /auth 경로에 로그인, 회원가입 기능 개발  ☑️ 
+- /auth 경로에 로그인, 회원가입 기능 개발 ☑️ 
 - 이메일, 비밀번호에 대한 유효성 검사  ☑️ 
-- 로그인 API 호출하고, 올바른 응답을 받았을 때 루트 경로로 이동 |☑️ 
+- 로그인 API 호출하고, 올바른 응답을 받았을 때 루트 경로로 이동 ☑️ 
 
 ToDo List  
 
@@ -46,6 +47,15 @@ ToDo List
 
 - React-Query를 사용하여 api 데이터를 fetch 했습니다.
 - React-Query의 useMutataion을 사용해서 update, delete, create를 다루었습니다.
+
+## 2-1주차 과제 
+
+- README 작성 및 코드 정리 ☑️ 
+- 설치, 환경설정 및 실행 방법 작성 ☑️ 
+- 최종 구현 화면 이미지/ 동영상으로 제공
+- 폴더 구조 tree 형태로 설명 
+- 과제 진행 시 주안점 
+- 개선 사항
 
 ## React-Query를 사용하며 느낀점 
 

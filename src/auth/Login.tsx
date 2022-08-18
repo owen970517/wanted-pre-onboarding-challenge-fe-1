@@ -22,10 +22,16 @@ function Login() {
             }));
           nav('/');
         }
-    }, 
+    },
+    onError(error:any) {
+      if (error.status === 400) {
+        console.log("에러 발생 ");
+      }
+    },
+
   })
   const onSubmit = (props :IForm) => {
-      loginUserMutation.mutate({ id: props.id, password: props.password });
+    loginUserMutation.mutate({ id: props.id, password: props.password });
   }
   return (
     <Wrapper onSubmit={handleSubmit(onSubmit)}>

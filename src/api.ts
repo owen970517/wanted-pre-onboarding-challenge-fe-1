@@ -33,7 +33,8 @@ export const postLogin = async (props : IForm) => {
 }
 
 export const getToDos =  async () => {
-    const response = await fetch('http://localhost:8080/todos', {
+    if (token) {
+      const response = await fetch('http://localhost:8080/todos', {
         method: 'GET',
         headers: {
             "Content-Type": "application/json",
@@ -41,6 +42,7 @@ export const getToDos =  async () => {
         }
     });
     return await response.json();
+    }
 }
 
 export const postToDos = (props : IToDo) => {
