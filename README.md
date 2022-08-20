@@ -1,9 +1,5 @@
 # 프리온보딩 프론트엔드 챌린지 사전 과제
 
-- useForm Hook을 사용하여 회원가입, 로그인 페이지 구현 
-- css는 styled components를 사용하였습니다.
-- todo를 추가, 삭제, 수정 기능을 구현했습니다.
-
 ## 설치 방법 및 실행
 
 - git clone https://github.com/owen970517/wanted-pre-onboarding-challenge-fe-1.git
@@ -14,10 +10,18 @@
 
 - ReactJS
 - TypeScript 
+    - 좋은 자동완성과 안전한 개발을 위해 사용
 - styled-components
+    - UI 컴포넌트를 작성하기 위해 사용
 - React Query
+    - 비동기 데이터를 효과적으로 관리하기 위해 사용
 - react-hook-form (useForm)
+    - 효율적인 Form을 구현하기 위해 사용
 - react-router-dom
+- useNavigate
+    - 페이지 전환 시 파라미터를 전달하기 위해 사용
+- useParams
+    - query string의 매개변수 값을 받아오기 위해 사용 (ex todo의 id값)
 
 ## 사전 구현 과제
 
