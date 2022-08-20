@@ -19,7 +19,7 @@
     - 효율적인 Form을 구현하기 위해 사용
 - react-router-dom
 - useNavigate
-    - 페이지 전환 시 파라미터를 전달하기 위해 사용
+    - 페이지 전환 시 파라미터를 전달하기 위해 사용 (ex 특정 todo의 modify)
 - useParams
     - query string의 매개변수 값을 받아오기 위해 사용 (ex todo의 id값)
 
