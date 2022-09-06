@@ -32,17 +32,15 @@ export const postLogin = async (props : IForm) => {
   return data;
 }
 
-export const getToDos =  async () => {
-    if (token) {
-      const response = await fetch('http://localhost:8080/todos', {
-        method: 'GET',
-        headers: {
-            "Content-Type": "application/json",
-            "Authorization": token,
-        }
+export const getToDos = async () => {
+    const response = await fetch('http://localhost:8080/todos', {
+      method: 'GET',
+      headers: {
+          "Content-Type": "application/json",
+          "Authorization": token,
+      }
     });
-    return await response.json();
-    }
+    return response.json();
 }
 
 export const postToDos = (props : IToDo) => {

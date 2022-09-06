@@ -13,12 +13,10 @@ const Sign = () => {
     formState: { errors },
   } = useForm<IForm>();
   const CreateUser = useMutation(createUser , {
-    onSuccess : () => {
+    onSuccess : (data) => {
       nav('/login');
+      console.log(data.message);
     },
-    onError : () => {
-      console.log('이미 존재하는 이메일입니다.');
-    }
   })
   const onSubmit = (props : IForm) => {
     CreateUser.mutate({id : props.id , password : props.password})

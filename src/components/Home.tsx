@@ -5,10 +5,11 @@ import { useNavigate } from 'react-router-dom';
 import { IToDo } from '../types/todo';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { deleteToDo, getToDos, postToDos } from '../api';
-
+import { useSelector } from 'react-redux';
 function Home() {
-  const [isLogin, setIsLogin] = useState(false);
-  const user = localStorage.getItem('preonboarding');
+  // const [isLogin, setIsLogin] = useState(false);
+  // const user = localStorage.getItem('preonboarding');
+  const isLogin = useSelector((state:any) => state.auth.isLogin);
   const {register , handleSubmit , setValue } = useForm<IToDo>();
   const {data:myToDos , isLoading } = useQuery('todos' , getToDos);
   const queryClient = useQueryClient();
@@ -25,13 +26,13 @@ function Home() {
     }
   })
   const nav = useNavigate();
-  useEffect(() => {
+/*   useEffect(() => {
     if (user) {
       setIsLogin(true);
     } else {
       setIsLogin(false);
     }
-  }, [user]);
+  }, [user]); */
   const onSubmit =  (props : IToDo) => {
     Addmutation.mutate({ title : props.title , content : props.content })
   }

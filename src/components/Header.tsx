@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { authActions } from '../store/authSlice';
 
 function Header() {
-  const [isLogin, setIsLogin] = useState(false);
+/*   const [isLogin, setIsLogin] = useState(false);
   const user = localStorage.getItem('preonboarding');
   useEffect(() => {
     if (user) {
@@ -11,13 +13,15 @@ function Header() {
     } else {
       setIsLogin(false);
     }
-  }, [user]);
+  }, [user]); */
+  const isLogin = useSelector((state:any) => state.auth.isLogin);
+  const dispatch = useDispatch();
   const nav = useNavigate();
   const onLogOut = () => {
     localStorage.removeItem('preonboarding');
+    dispatch(authActions.logout());
     nav('/login');
   };
-
   return (
     <Wrapper>
       <Title>My ToDo</Title>
@@ -26,8 +30,7 @@ function Header() {
           <StyledLink to="/">Home</StyledLink>
           <Link to="/sign">회원가입</Link>
         </LI>
-        {isLogin && <button onClick={onLogOut}>로그아웃</button>}
-        {!isLogin &&  <LI>
+        {isLogin ? <button onClick={onLogOut}>로그아웃</button> : <LI>
             <Link to="/login">로그인</Link>
           </LI>}
       
