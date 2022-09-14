@@ -1,19 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { authActions } from '../store/authSlice';
 
 function Header() {
-/*   const [isLogin, setIsLogin] = useState(false);
-  const user = localStorage.getItem('preonboarding');
-  useEffect(() => {
-    if (user) {
-      setIsLogin(true);
-    } else {
-      setIsLogin(false);
-    }
-  }, [user]); */
   const isLogin = useSelector((state:any) => state.auth.isLogin);
   const dispatch = useDispatch();
   const nav = useNavigate();

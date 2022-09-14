@@ -40,7 +40,7 @@ export const getToDos = async () => {
           "Authorization": token,
       }
     });
-    return response.json();
+    return await response.json();
 }
 
 export const postToDos = (props : IToDo) => {

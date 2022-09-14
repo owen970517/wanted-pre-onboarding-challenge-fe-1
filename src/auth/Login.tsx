@@ -20,6 +20,7 @@ function Login() {
   } = useForm<IForm>();
   const loginUserMutation = useMutation(postLogin ,{
     onSuccess : (data) => {
+      if(data.token) {
         localStorage.setItem(
           'preonboarding',
           JSON.stringify({
@@ -27,7 +28,13 @@ function Login() {
           }));
         dispatch(authActions.login());
         nav('/');
-    }
+      }
+    },
+    onError: (error:any) => {
+      if (error.response?.data.code === 400) {
+        console.log(error.message);
+      }
+    },
   })
   const onSubmit = (props :IForm) => {
     loginUserMutation.mutate({ id: props.id, password: props.password } )
