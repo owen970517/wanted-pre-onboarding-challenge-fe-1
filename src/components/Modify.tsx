@@ -11,32 +11,39 @@ import { IToDo } from '../types/todo';
 const Modify = () => {
     const params = useParams();
     const nav = useNavigate();
-    const {register , handleSubmit ,setValue} = useForm<IToDo>();
-    const {data}= useQuery('todo' , () => getToDoById(params.id as string))
-    setValue('title' , data?.data.title)
-    setValue('content' , data?.data.content)
+    const {data:detailToDo}= useQuery('todo' , () => getToDoById(params.id as string))
+    const {register , handleSubmit ,setValue ,formState: { errors }} = useForm<IToDo>();
+    setValue('title' , detailToDo?.data.title)
+    setValue('content' , detailToDo?.data.content)
     const mutation = useMutation(  modifyToDo , {
       onSuccess: () => {
         nav('/');
       },
     });
     const onSubmit = (props:IToDo) => {
-      mutation.mutate({id : params.id , title : props.title , content : props.content})
+      mutation.mutate({id : params.id , title : props.title , content : props.content , updatedAt : new Date().toISOString()})
     }
   return ( 
     <div>
-        <Wrapper onSubmit={handleSubmit(onSubmit)}> 
-            <Input           
-                {...register('title', {
-                required: true,
-                minLength: 6,
-                })} 
-                type='text'
-                placeholder='title'></Input>
+        <Wrapper onSubmit={handleSubmit(onSubmit)}>                   
+            <Input    
+            {...register('title', {
+            required: true,
+            minLength: {
+              value : 5,
+              message : '5글자 이상을 적어주세요'
+            },
+            })} 
+            type='text'
+            placeholder='title'></Input>
+            {errors.title && <p>{errors.title.message}</p>}
             <Input
                 {...register('content', {
                 required: true,
-                minLength: 6,
+                minLength: {
+                  value : 5,
+                  message : '5글자 이상을 적어주세요'
+                },
                 })}
                 type='text'
                 placeholder='content'></Input>

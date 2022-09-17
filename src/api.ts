@@ -89,7 +89,8 @@ export const modifyToDo = ( props:IToDo) => {
     },
     body : JSON.stringify({
       title : props.title,
-      content : props.content
+      content : props.content,
+      updatedAt : props.updatedAt
     })
   }).then(response => response.json())
 }
