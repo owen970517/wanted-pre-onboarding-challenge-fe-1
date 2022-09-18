@@ -4,8 +4,11 @@ import { combineReducers } from "@reduxjs/toolkit";
 import { persistReducer } from "redux-persist";
 import storage from 'redux-persist/lib/storage'
 import { getDefaultMiddleware } from '@reduxjs/toolkit';
+import persistStore from "redux-persist/es/persistStore";
+import modalSlice from "./modalSlice";
 const reducers = combineReducers({
     auth: authSlice,
+    modal:modalSlice,
   });
   
   const persistConfig = {
@@ -25,5 +28,5 @@ const reducers = combineReducers({
 // const store = configureStore({
 //     reducer : authSlice,
 // })
-
+export const persistor = persistStore(store);
 export default store;

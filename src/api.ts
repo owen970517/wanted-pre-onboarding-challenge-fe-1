@@ -43,18 +43,19 @@ export const getToDos = async () => {
     return await response.json();
 }
 
-export const postToDos = (props : IToDo) => {
-    return fetch('http://localhost:8080/todos' , {
-        method : 'POST' , 
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization" : token,
-        },
-        body : JSON.stringify({
-          title : props.title,
-          content :props.content
-        })
-      }).then((response) => { response.json()})
+export const postToDos = async (props : IToDo) => {
+    const response = await fetch('http://localhost:8080/todos', {
+    method: 'POST',
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": token,
+    },
+    body: JSON.stringify({
+      title: props.title,
+      content: props.content
+    })
+  });
+  response.json();
 }
 
 export const deleteToDo = async (id:IToDo) => {
@@ -70,27 +71,29 @@ export const deleteToDo = async (id:IToDo) => {
   } 
 }
 
-export const getToDoById = (id:string) => {
-  return fetch('http://localhost:8080/todos/'+ id  , {
-    method : 'GET' , 
+export const getToDoById = async (id:string) => {
+  const response = await fetch('http://localhost:8080/todos/' + id, {
+    method: 'GET',
     headers: {
       "Content-Type": "application/json",
-      "Authorization" : token       
+      "Authorization": token
     },
-  }).then(response => response.json())
+  });
+  return await response.json();
 }
 
-export const modifyToDo = ( props:IToDo) => {
-  return fetch('http://localhost:8080/todos/'+ props.id , {
-    method : 'PUT' ,
+export const modifyToDo = async ( props:IToDo) => {
+  const response = await fetch('http://localhost:8080/todos/' + props.id, {
+    method: 'PUT',
     headers: {
       "Content-Type": "application/json",
-      "Authorization" : token
+      "Authorization": token
     },
-    body : JSON.stringify({
-      title : props.title,
-      content : props.content,
-      updatedAt : props.updatedAt
+    body: JSON.stringify({
+      title: props.title,
+      content: props.content,
+      updatedAt: props.updatedAt
     })
-  }).then(response => response.json())
+  });
+  return await response.json();
 }

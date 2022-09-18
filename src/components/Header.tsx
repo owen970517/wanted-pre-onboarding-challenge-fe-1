@@ -19,9 +19,11 @@ function Header() {
       <UL>
         <LI>
           <StyledLink to="/">Home</StyledLink>
+        </LI>
+        <LI>
           <Link to="/sign">회원가입</Link>
         </LI>
-        {isLogin ? <button onClick={onLogOut}>로그아웃</button> : <LI>
+        {isLogin ? <LI><button onClick={onLogOut}>로그아웃</button></LI> : <LI>
             <Link to="/login">로그인</Link>
           </LI>}
       
