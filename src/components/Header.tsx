@@ -21,10 +21,10 @@ function Header() {
           <StyledLink to="/">Home</StyledLink>
         </LI>
         <LI>
-          <Link to="/sign">회원가입</Link>
+          <StyledLink to="/sign">회원가입</StyledLink>
         </LI>
-        {isLogin ? <LI><button onClick={onLogOut}>로그아웃</button></LI> : <LI>
-            <Link to="/login">로그인</Link>
+        {isLogin ? <LI><h3 onClick={onLogOut} style={{cursor:'pointer'}}>로그아웃</h3></LI> : <LI>
+            <StyledLink to="/login">로그인</StyledLink>
           </LI>}
       
       </UL>
@@ -61,7 +61,6 @@ const LI = styled.li`
 `;
 
 const StyledLink = styled(Link)`
-  margin-right: 10px;
   text-decoration: none;
   color: #000;
 `;

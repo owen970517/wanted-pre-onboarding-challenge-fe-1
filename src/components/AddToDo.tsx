@@ -16,11 +16,11 @@ const AddToDo = () => {
       queryClient.invalidateQueries('todos');
       setValue('title','');
       setValue('content','');
+      dispatch(modalActions.close());
     },
   });
   const onSubmit =  (props : IToDo) => {
     Addmutation.mutate({ title : props.title , content : props.content });
-    dispatch(modalActions.close());
   }
   const onModalClose = () => {
     dispatch(modalActions.close());

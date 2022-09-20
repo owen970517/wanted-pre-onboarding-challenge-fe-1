@@ -25,8 +25,9 @@ const reducers = combineReducers({
         serializableCheck: false
       })
   }); 
-// const store = configureStore({
-//     reducer : authSlice,
-// })
+
 export const persistor = persistStore(store);
 export default store;
+
+// 리듀서의 타입을 리턴해준다. 
+export type RootState = ReturnType<typeof reducers>;
