@@ -11,7 +11,7 @@ import { AiOutlinePlusCircle } from "react-icons/ai";
 import { RootState } from '../store/store';
 
 function Home() {
-  const [checked, setChecked] = useState<boolean[]>([]);
+  const [checked , setChecked] =useState<string[]>([]);
   const isLogin = useSelector((state:RootState) => state.auth.isLogin);
   const isModal = useSelector((state:RootState) => state.modal.isModal);
   const dispatch = useDispatch();
@@ -32,18 +32,10 @@ function Home() {
   const onModalOpen = () => {
     dispatch(modalActions.open());
   }
-  const handleCheck = (event:any) => {
-    var updatedList = [...checked];
-    if (event.target.checked) {
-      updatedList = [...checked, event.target.id];
-    } else {
-      updatedList.splice(checked.indexOf(event.target.value), 1);
-    }
-    setChecked(updatedList);
-  };
-  console.log(checked);
-  const isChecked = (id:any) =>
-   checked.includes(id) ? "line-through" : "";
+  const onChecked = (selected:any) => {
+    setChecked(selected)
+  }
+
   return (
     <>
       <ToDoList>
@@ -51,12 +43,18 @@ function Home() {
         {isLogin ? myToDos?.data.map((todo : IToDo , idx:string) => {
           return (
             <ToDoBox key={todo.id}>
+              <input id={todo.id} type='checkbox' onChange ={(e)=>{
+                if(e.target.checked) {
+                  onChecked([...checked , todo.id])
+                } else {
+                  onChecked([checked.filter((d) => d !== todo.id)])
+                }
+              }}></input>
               <ToDo onClick={()=> { onModify(todo.id)}}>
-                <h2 style={{textDecoration : isChecked(idx)}}>{todo.title}</h2>
-                <h2 style={{textDecoration : isChecked(idx)}}>{todo.content}</h2>
+                <h2 style={{textDecoration : checked.includes(todo.id) ? 'line-through' : 'none'}}>{todo.title}</h2>
+                <h2>{todo.content}</h2>
               </ToDo>
               <Buttons>
-                <input id={idx} type='checkbox' onChange={handleCheck}></input>
                 <button style={{backgroundColor: 'transparent' , cursor:'pointer'}} onClick={()=> { onDelete(todo.id)}}>❌</button>
               </Buttons>
             </ToDoBox>
