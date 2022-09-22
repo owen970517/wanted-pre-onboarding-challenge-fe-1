@@ -1,4 +1,4 @@
-import React , {useState} from 'react';
+import React , {useEffect, useState} from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { IToDo } from '../types/todo';
@@ -12,6 +12,7 @@ import { RootState } from '../store/store';
 
 function Home() {
   const [checked , setChecked] =useState<string[]>([]);
+  const getCheckedList = JSON.parse(localStorage.getItem('checkedList') as any);
   const isLogin = useSelector((state:RootState) => state.auth.isLogin);
   const isModal = useSelector((state:RootState) => state.modal.isModal);
   const dispatch = useDispatch();
@@ -32,10 +33,21 @@ function Home() {
   const onModalOpen = () => {
     dispatch(modalActions.open());
   }
-  const onChecked = (selected:any) => {
+  const onChecked = (selected:string[]) => {
     setChecked(selected)
   }
-
+  const changeCheckHandler = (e:React.ChangeEvent<HTMLInputElement> , id:string) => {
+    if(e.target.checked) {
+      onChecked([...checked, id]);
+      localStorage.setItem('checkedList' , JSON.stringify([...checked,id]));
+      
+    } else {
+      onChecked(checked.filter((d) => d !== id))
+    }
+  }
+  const completeToDo = (id:string) => getCheckedList?.includes(id) ? 'line-through' : 'none';
+  console.log(getCheckedList);
+   
   return (
     <>
       <ToDoList>
@@ -43,16 +55,10 @@ function Home() {
         {isLogin ? myToDos?.data.map((todo : IToDo , idx:string) => {
           return (
             <ToDoBox key={todo.id}>
-              <input id={todo.id} type='checkbox' onChange ={(e)=>{
-                if(e.target.checked) {
-                  onChecked([...checked , todo.id])
-                } else {
-                  onChecked([checked.filter((d) => d !== todo.id)])
-                }
-              }}></input>
+              <input id={todo.id} type='checkbox' onChange={(e) => changeCheckHandler(e,todo.id)} checked={getCheckedList?.includes(todo.id) ? true : false }></input>
               <ToDo onClick={()=> { onModify(todo.id)}}>
-                <h2 style={{textDecoration : checked.includes(todo.id) ? 'line-through' : 'none'}}>{todo.title}</h2>
-                <h2>{todo.content}</h2>
+                <h2 style={{textDecoration : completeToDo(todo.id)}}>{todo.title}</h2>
+                <h2 style={{textDecoration : completeToDo(todo.id)}}>{todo.content}</h2>
               </ToDo>
               <Buttons>
                 <button style={{backgroundColor: 'transparent' , cursor:'pointer'}} onClick={()=> { onDelete(todo.id)}}>❌</button>
