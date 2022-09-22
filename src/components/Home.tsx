@@ -42,7 +42,8 @@ function Home() {
       localStorage.setItem('checkedList' , JSON.stringify([...checked,id]));
       
     } else {
-      onChecked(checked.filter((d) => d !== id))
+      onChecked(checked.filter((d:string) => d !== id))
+      localStorage.setItem('checkedList' , JSON.stringify(getCheckedList.filter((d:string) => d !== id)));
     }
   }
   const completeToDo = (id:string) => getCheckedList?.includes(id) ? 'line-through' : 'none';
