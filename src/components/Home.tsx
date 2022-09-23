@@ -12,7 +12,7 @@ import { RootState } from '../store/store';
 
 function Home() {
   const [checked , setChecked] =useState<string[]>([]);
-  const getCheckedList = JSON.parse(localStorage.getItem('checkedList') as any);
+  const getCheckedList = JSON.parse(localStorage.getItem('checkedList') as string) || [] ;
   const isLogin = useSelector((state:RootState) => state.auth.isLogin);
   const isModal = useSelector((state:RootState) => state.modal.isModal);
   const dispatch = useDispatch();
@@ -26,6 +26,7 @@ function Home() {
   })
   const onDelete = (id:IToDo) => {
     DeleteMutation.mutate(id);
+    localStorage.setItem('checkedList' , JSON.stringify(getCheckedList.filter((d:string) => d !== id)));
   }
   const onModify = (id : IToDo) => {
     nav('/modify/' + id);
@@ -33,14 +34,13 @@ function Home() {
   const onModalOpen = () => {
     dispatch(modalActions.open());
   }
-  const onChecked = (selected:string[]) => {
-    setChecked(selected)
+  const onChecked = (checkedList:string[]) => {
+    setChecked(checkedList)
   }
   const changeCheckHandler = (e:React.ChangeEvent<HTMLInputElement> , id:string) => {
     if(e.target.checked) {
       onChecked([...checked, id]);
-      localStorage.setItem('checkedList' , JSON.stringify([...checked,id]));
-      
+      localStorage.setItem('checkedList' , JSON.stringify([...getCheckedList,id])); 
     } else {
       onChecked(checked.filter((d:string) => d !== id))
       localStorage.setItem('checkedList' , JSON.stringify(getCheckedList.filter((d:string) => d !== id)));
@@ -48,7 +48,6 @@ function Home() {
   }
   const completeToDo = (id:string) => getCheckedList?.includes(id) ? 'line-through' : 'none';
   console.log(getCheckedList);
-   
   return (
     <>
       <ToDoList>
