@@ -20,12 +20,13 @@ function Header() {
         <LI>
           <StyledLink to="/">Home</StyledLink>
         </LI>
-        <LI>
+        {!isLogin && <LI>
           <StyledLink to="/sign">회원가입</StyledLink>
-        </LI>
+        </LI>}
         {isLogin ? <LI><h3 onClick={onLogOut} style={{cursor:'pointer'}}>로그아웃</h3></LI> : <LI>
             <StyledLink to="/login">로그인</StyledLink>
-          </LI>}
+          </LI>
+        }
       
       </UL>
     </Wrapper>

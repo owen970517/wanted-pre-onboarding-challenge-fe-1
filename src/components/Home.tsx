@@ -1,4 +1,4 @@
-import React , {useEffect, useState} from 'react';
+import React , {useState} from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { IToDo } from '../types/todo';
@@ -47,7 +47,6 @@ function Home() {
     }
   }
   const completeToDo = (id:string) => getCheckedList?.includes(id) ? 'line-through' : 'none';
-  console.log(getCheckedList);
   return (
     <>
       <ToDoList>
