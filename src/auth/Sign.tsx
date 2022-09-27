@@ -13,13 +13,19 @@ const Sign = () => {
     formState: { errors },
   } = useForm<IForm>();
   const CreateUser  = useMutation(createUser , {
-    onSuccess : (data) => {
-      nav('/login');
-      console.log(data.message);
+    onSuccess : (data:any) => {
+      if (data.message) {
+        nav('/login');
+        console.log(data.message);
+      }
     }
   })
-  const onSubmit = (props : IForm) => {
-    CreateUser.mutate({id : props.id , password : props.password})
+  const onSubmit = async (props : IForm) => {
+    CreateUser.mutate({ id: props.id, password: props.password } , {
+      onError : (error :any) => {
+        return error.response.data && error.response.data.details
+      }
+    })
   };
   return (
     <Wrapper onSubmit={handleSubmit(onSubmit)}>

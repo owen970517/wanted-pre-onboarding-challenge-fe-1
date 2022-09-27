@@ -13,8 +13,14 @@ export const createUser = async (props :IForm) => {
       email: props.id,
       password: props.password
     })
-  });
-  return await response.json();
+  })
+  if (response.ok) {
+    return await response.json();
+  }else {
+    const errorData = await response.json().catch(err => console.log(err));
+    alert(errorData.details);
+  }
+  
 }
 
 export const postLogin = async (props : IForm) => {
@@ -28,11 +34,12 @@ export const postLogin = async (props : IForm) => {
       password: props.password
     })
   });
-  const data = await response.json();
   if (response.ok) {
+    const data = await response.json();
     return data;
   } else {
-    alert('이메일 또는 비밀번호가 틀렸습니다.');
+    const errorData = await response.json().catch(err => console.log(err));
+    alert(errorData.details);
   }
 }
 
@@ -44,11 +51,12 @@ export const getToDos = async () => {
           "Authorization": token,
       }
     });
-    const data = await response.json();
     if (response.ok) {
+      const data = await response.json();
       return data
     } else {
-      console.log('에러 발생');
+      const errorData = await response.json().catch(err => console.log(err));
+      alert(errorData.details);
     }
 }
 
