@@ -12,11 +12,11 @@ const Sign = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<IForm>();
-  const CreateUser = useMutation(createUser , {
+  const CreateUser  = useMutation(createUser , {
     onSuccess : (data) => {
       nav('/login');
       console.log(data.message);
-    },
+    }
   })
   const onSubmit = (props : IForm) => {
     CreateUser.mutate({id : props.id , password : props.password})

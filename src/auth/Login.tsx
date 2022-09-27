@@ -4,11 +4,16 @@ import { useNavigate } from 'react-router-dom';
 import { IForm } from '../types/user';
 import { useMutation } from 'react-query';
 import { postLogin } from '../api';
+import { useDispatch } from 'react-redux';
+import { authActions } from '../store/authSlice';
 import LoadingAndError from '../error-loading/LoadingAndError';
 import LoginError from './LoginError';
 import Loginloading from './Loginloading';
-import { useDispatch } from 'react-redux';
-import { authActions } from '../store/authSlice';
+
+interface IResponse {
+  message : string;
+  token :string;
+}
 
 function Login() {
   const dispatch = useDispatch();
@@ -18,29 +23,26 @@ function Login() {
     handleSubmit,
     formState: { errors },
   } = useForm<IForm>();
-  const loginUserMutation = useMutation(postLogin ,{
-    onSuccess : (data) => {
-      if(data.token) {
+  const loginMutation = useMutation(postLogin , {
+    onSuccess : (getData:IResponse) => {
+      if(getData.token) {
         localStorage.setItem(
           'preonboarding',
           JSON.stringify({
-            token: data.token
+            token: getData.token
           }));
         dispatch(authActions.login());
-        nav('/');
+        nav('/');  
       }
-    },
-    onError: (error:any) => {
-      if (error.response?.data.code === 400) {
-        console.log(error.message);
-      }
-    },
+    }
   })
-  const onSubmit = (props :IForm) => {
-    loginUserMutation.mutate({ id: props.id, password: props.password } )
+  
+  const onSubmit = async (props :IForm) => {
+    loginMutation.mutate({ id: props.id, password: props.password })
   }
+
   return (
-    <LoadingAndError errorFallback={<LoginError/>} loadingFallback={<Loginloading/>}>
+    <LoadingAndError errorFallback={<LoginError />} loadingFallback={<Loginloading />}>
       <Wrapper onSubmit={handleSubmit(onSubmit)}>
         <h3>로그인 페이지</h3>
         {errors.id ? (

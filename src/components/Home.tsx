@@ -51,7 +51,7 @@ function Home() {
     <>
       <ToDoList>
         {isLoading && <h1>Loading...</h1>}
-        {isLogin ? myToDos?.data.map((todo : IToDo , idx:string) => {
+        {isLogin ? myToDos?.data.map((todo : IToDo) => {
           return (
             <ToDoBox key={todo.id}>
               <input id={todo.id} type='checkbox' onChange={(e) => changeCheckHandler(e,todo.id)} checked={getCheckedList?.includes(todo.id) ? true : false }></input>

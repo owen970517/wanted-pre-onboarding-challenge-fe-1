@@ -29,7 +29,11 @@ export const postLogin = async (props : IForm) => {
     })
   });
   const data = await response.json();
-  return data;
+  if (response.ok) {
+    return data;
+  } else {
+    alert('이메일 또는 비밀번호가 틀렸습니다.');
+  }
 }
 
 export const getToDos = async () => {
@@ -40,7 +44,12 @@ export const getToDos = async () => {
           "Authorization": token,
       }
     });
-    return await response.json();
+    const data = await response.json();
+    if (response.ok) {
+      return data
+    } else {
+      console.log('에러 발생');
+    }
 }
 
 export const postToDos = async (props : IToDo) => {
@@ -55,7 +64,6 @@ export const postToDos = async (props : IToDo) => {
       content: props.content
     })
   });
-  response.json();
 }
 
 export const deleteToDo = async (id:IToDo) => {
@@ -79,7 +87,10 @@ export const getToDoById = async (id:string) => {
       "Authorization": token
     },
   });
-  return await response.json();
+  const data = await response.json();
+  if (response.ok) {
+    return data
+  } 
 }
 
 export const modifyToDo = async ( props:IToDo) => {
