@@ -1,68 +1,30 @@
-import React , {useState} from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
 import { IToDo } from '../types/todo';
-import { useMutation, useQuery, useQueryClient } from 'react-query';
-import { deleteToDo, getToDos} from '../api';
+import {  getToDos} from '../api';
 import {  useDispatch, useSelector } from 'react-redux';
-import AddToDo from './AddToDo';
+import AddToDo from '../todo/AddToDo';
 import { modalActions } from '../store/modalSlice';
 import { AiOutlinePlusCircle } from "react-icons/ai";
 import { RootState } from '../store/store';
+import ToDosList from '../todo/ToDosList';
+import { useQuery } from 'react-query';
 
 function Home() {
-  const [checked , setChecked] =useState<string[]>([]);
-  const getCheckedList = JSON.parse(localStorage.getItem('checkedList') as string) || [] ;
   const isLogin = useSelector((state:RootState) => state.auth.isLogin);
   const isModal = useSelector((state:RootState) => state.modal.isModal);
   const dispatch = useDispatch();
-  const nav = useNavigate();
   const {data:myToDos , isLoading } = useQuery('todos' , getToDos);
-  const queryClient = useQueryClient();
-  const DeleteMutation = useMutation(deleteToDo , {
-    onSuccess : () => {
-      queryClient.invalidateQueries('todos');
-    }
-  })
-  const onDelete = (id:IToDo) => {
-    DeleteMutation.mutate(id);
-    localStorage.setItem('checkedList' , JSON.stringify(getCheckedList.filter((d:string) => d !== id)));
-  }
-  const onModify = (id : IToDo) => {
-    nav('/modify/' + id);
-  }
   const onModalOpen = () => {
     dispatch(modalActions.open());
   }
-  const onChecked = (checkedList:string[]) => {
-    setChecked(checkedList)
-  }
-  const changeCheckHandler = (e:React.ChangeEvent<HTMLInputElement> , id:string) => {
-    if(e.target.checked) {
-      onChecked([...checked, id]);
-      localStorage.setItem('checkedList' , JSON.stringify([...getCheckedList,id])); 
-    } else {
-      onChecked(checked.filter((d:string) => d !== id))
-      localStorage.setItem('checkedList' , JSON.stringify(getCheckedList.filter((d:string) => d !== id)));
-    }
-  }
-  const completeToDo = (id:string) => getCheckedList?.includes(id) ? 'line-through' : 'none';
   return (
     <>
       <ToDoList>
         {isLoading && <h1>Loading...</h1>}
         {isLogin ? myToDos?.data.map((todo : IToDo) => {
           return (
-            <ToDoBox key={todo.id}>
-              <input id={todo.id} type='checkbox' onChange={(e) => changeCheckHandler(e,todo.id)} checked={getCheckedList?.includes(todo.id) ? true : false }></input>
-              <ToDo onClick={()=> { onModify(todo.id)}}>
-                <h2 style={{textDecoration : completeToDo(todo.id)}}>{todo.title}</h2>
-                <h2 style={{textDecoration : completeToDo(todo.id)}}>{todo.content}</h2>
-              </ToDo>
-              <Buttons>
-                <button style={{backgroundColor: 'transparent' , cursor:'pointer'}} onClick={()=> { onDelete(todo.id)}}>❌</button>
-              </Buttons>
-            </ToDoBox>
+            <ToDosList key={todo.id} id={todo.id!} title={todo.title} content={todo.content}/>
           )
         }) : 
         <>
@@ -83,10 +45,8 @@ function Home() {
     </>
   );
 }
-const ToDoBox = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+const ToDoList = styled.div`
+  text-align: center;
 `
 
 const Background = styled.div`
@@ -111,21 +71,6 @@ const ModalContainer = styled.div`
 
 `;
 
-const ToDoList = styled.div`
-  text-align: center;
-`
-const ToDo = styled.div`
-  display:flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding : 10px;
-  cursor: pointer;
-`
-const Buttons = styled.div`
-  display : flex;
-  margin-top : 10px;
-`
 const AddDiv = styled.div`
   display: flex;
   justify-content: center;

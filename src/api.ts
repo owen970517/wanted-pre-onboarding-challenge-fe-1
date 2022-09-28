@@ -61,7 +61,7 @@ export const getToDos = async () => {
 }
 
 export const postToDos = async (props : IToDo) => {
-    const response = await fetch('http://localhost:8080/todos', {
+    await fetch('http://localhost:8080/todos', {
     method: 'POST',
     headers: {
       "Content-Type": "application/json",
@@ -74,7 +74,7 @@ export const postToDos = async (props : IToDo) => {
   });
 }
 
-export const deleteToDo = async (id:IToDo) => {
+export const deleteToDo = async (id:string) => {
   const ok = window.confirm("정말 삭제하시겠습니까??");
   if (ok) {
     await fetch('http://localhost:8080/todos/' + id , {

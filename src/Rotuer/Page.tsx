@@ -3,7 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import Login from '../auth/Login'
 import Sign from '../auth/Sign';
 import Home from '../components/Home';
-import Modify from '../components/Modify';
+import Modify from '../todo/Modify';
 function Page() {
   return (
     <Routes>
