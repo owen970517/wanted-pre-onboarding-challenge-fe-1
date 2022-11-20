@@ -15,6 +15,7 @@ function Home() {
   const isModal = useSelector((state:RootState) => state.modal.isModal);
   const dispatch = useDispatch();
   const {data:myToDos , isLoading } = useQuery('todos' , getToDos);
+  console.log(myToDos);
   const onModalOpen = () => {
     dispatch(modalActions.open());
   }

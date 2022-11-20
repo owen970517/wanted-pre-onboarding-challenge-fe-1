@@ -1,3 +1,4 @@
+import axios from "axios";
 import { IToDo } from "./types/todo";
 import { IForm } from "./types/user";
 
@@ -44,21 +45,17 @@ export const postLogin = async (props : IForm) => {
 }
 
 export const getToDos = async () => {
-    const response = await fetch('http://localhost:8080/todos', {
-      method: 'GET',
-      headers: {
-          "Content-Type": "application/json",
-          "Authorization": token,
-      }
-    });
-    if (response.ok) {
-      const data = await response.json();
+    const response = await axios.get('http://localhost:8080/todos', {
+      headers : { "Authorization": token, }
+    })
+    if (response.status === 200) {
+      const data = response.data
       return data
     } else {
-      const errorData = await response.json().catch(err => console.log(err));
-      alert(errorData.details);
+      const errorData = await response.data.catch((err: any) => console.log(err))
+      alert(errorData.details)
     }
-}
+  }
 
 export const postToDos = async (props : IToDo) => {
     await fetch('http://localhost:8080/todos', {
