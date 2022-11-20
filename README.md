@@ -58,19 +58,20 @@ ToDo List
 - 과제 진행 시 주안점 
 - 개선 사항
 
-## React-Query를 사용하며 느낀점 
-
-- useEffect, useState를 사용하지 않아도 되기 때문에 코드의 양이 줄일 수 있었습니다.
-- isloading, isError, isFetching 같은 동작의 상태에 대한 값을 갖고 있어서 해당 기능을 구현하기 편합니다.
-- 간단하게 validation을 구현할 수 있음 
-
-
 ## 추가로 개선한 점 
 
-- todo 삭제 시 alert창을 띄워 정말 삭제할 것인지 확인하도록 만듦 ☑️ 
-- 로그인 했을 때만 todolist를 생성할 수 있도록 만듦 ☑️ 
-- todo 수정할 때 현재 값을 보여주도록 개선 ☑️ 
-- 리덕스를 추가 ☑️
-- 체크박스를 추가하여 완료한 todo를 알 수 있도록 만듦 ☑️
-- React-Query를 사용하여 ToDo API 호출 ☑️ 
-- React-Query의 useMutataion을 사용해서 todo의 CRUD 구현 ☑️ 
+- todo 삭제 시 alert창을 띄워 정말 삭제할 것인지 확인하도록 만듦 
+- 로그인 했을 때만 todolist를 생성할 수 있도록 만듦 
+- todo 수정할 때 현재 값을 보여주도록 개선 
+- Redux-toolkit을 사용하여 상태 관리 
+- 체크박스를 추가하여 완료한 todo를 알 수 있도록 만듦
+- React-Query를 사용하여 ToDo API 호출 
+- React-Query의 useMutataion을 사용해서 todo의 CRUD 구현 
+- React.memo를 사용하여 props가 변한 것만 리렌더링 하도록 개선 
+
+## 챌린지를 하면서 느낀 점 
+
+- 올바른 README 작성과 폴더 설계 방법을 배워 주니어 개발자로서 더 발전할 수 있었습니다. 
+- React-Query를 사용하여 useEffect, useState를 사용하지 않아도 되기 때문에 코드의 양이 줄일 수 있었습니다.
+- React-Query에 isloading, isError, isFetching 같은 동작의 상태에 대한 값을 갖고 있어서 해당 기능을 구현하기 편했습니다.
+ 
