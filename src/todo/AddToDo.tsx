@@ -29,21 +29,21 @@ const AddToDo = () => {
       <Wrapper onSubmit={handleSubmit(onSubmit)}>
         <h1>할 일 추가하기</h1>
         <CloseBtn onClick={onModalClose}></CloseBtn>
-        <Input type='text'
-              {...register('title', {
-                required: true,
-                maxLength: 30,
-              })} 
-              placeholder='title'
-        ></Input>
-                <Input type='text'
+          <Input type='text'
+                {...register('title', {
+                  required: true,
+                  maxLength: 30,
+                })} 
+                placeholder='title'
+          ></Input>
+          <Input type='text'
               {...register('content', {
                 required: true,
                 maxLength: 30,
               })} 
               placeholder='content'
-        ></Input>
-        <button>추가</button>
+          ></Input>
+          <button>추가</button>
     </Wrapper>
   )
 }
@@ -57,7 +57,7 @@ const Wrapper = styled.form`
 const Input = styled.input`
   border: 1px solid black;
   margin: 10px 10px;
-  width: 500px;
+  width: 50%;
   height: 50px;
   padding: 10px;
 `;

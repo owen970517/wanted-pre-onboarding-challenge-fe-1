@@ -21,7 +21,12 @@ function Home() {
   }
   return (
     <>
-      <ToDoList>
+      {isLogin && 
+        <AddDiv>
+          <AddBtn onClick={onModalOpen}></AddBtn>
+        </AddDiv>
+      }
+      <ToDoBox>
         {isLoading && <h1>Loading...</h1>}
         {isLogin ? myToDos?.data.map((todo : IToDo) => {
           return (
@@ -31,12 +36,7 @@ function Home() {
         <>
           <h1>로그인을 해야 사용가능합니다.</h1>
         </>}
-      </ToDoList>
-      {isLogin && 
-        <AddDiv>
-          <AddBtn onClick={onModalOpen}></AddBtn>
-        </AddDiv>
-      }
+      </ToDoBox>
       {isModal && 
       <Background>
         <ModalContainer>
@@ -46,8 +46,14 @@ function Home() {
     </>
   );
 }
-const ToDoList = styled.div`
-  text-align: center;
+const ToDoBox = styled.div`
+  background-color: #fff;
+  padding: 30px 20px;
+  margin-top: 20px;
+  border-radius: 10px;
+  box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+  width: 100%;
+  position: relative;
 `
 
 const Background = styled.div`

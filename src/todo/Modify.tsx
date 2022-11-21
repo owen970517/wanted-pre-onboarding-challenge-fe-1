@@ -6,8 +6,6 @@ import styled from 'styled-components';
 import { getToDoById, modifyToDo } from '../api';
 import { IToDo } from '../types/todo';
 
-
-
 const Modify = () => {
     const params = useParams();
     const nav = useNavigate();

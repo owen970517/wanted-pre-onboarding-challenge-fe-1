@@ -37,15 +37,14 @@ const ToDosList = (props :IToDo) => {
   const completeToDo = (id:string) => getCheckedList?.includes(id) ? 'line-through' : 'none';
   return (
     <ToDoBox key={props.id}>
-    <input id={props.id} type='checkbox' onChange={(e) => changeCheckHandler(e,props.id!)} checked={getCheckedList?.includes(props.id) ? true : false }></input>
-    <ToDo onClick={()=> { onModify(props.id!)}}>
-      <h2 style={{textDecoration : completeToDo(props.id!)}}>{props.title}</h2>
-      <h2 style={{textDecoration : completeToDo(props.id!)}}>{props.content}</h2>
-    </ToDo>
-    <Buttons>
-      <button style={{backgroundColor: 'transparent' , cursor:'pointer'}} onClick={()=> { onDelete(props.id!)}}>❌</button>
-    </Buttons>
-  </ToDoBox>
+      <input id={props.id} type='checkbox' onChange={(e) => changeCheckHandler(e,props.id!)} checked={getCheckedList?.includes(props.id) ? true : false }></input>
+      <ToDo onClick={()=> { onModify(props.id!)}}>
+        <h2 style={{textDecoration : completeToDo(props.id!)}}>{props.title}</h2>
+      </ToDo>
+      <Buttons>
+        <button style={{backgroundColor: 'transparent' , cursor:'pointer'}} onClick={()=> { onDelete(props.id!)}}>❌</button>
+      </Buttons>
+    </ToDoBox>
   )
 }
 const ToDoBox = styled.div`
@@ -54,11 +53,15 @@ const ToDoBox = styled.div`
   align-items: center;
 `
 const ToDo = styled.div`
+  background-color: #fff;
+  height: 50px;
+  padding : 5px 10px;
+  margin-top: 10px;
   display:flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding : 10px;
+  border-bottom: 2px solid #d1d3d4;
   cursor: pointer;
 `
 const Buttons = styled.div`
