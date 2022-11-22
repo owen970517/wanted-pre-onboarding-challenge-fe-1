@@ -33,14 +33,18 @@ export const postLogin = async (props : IForm) => {
 }
 
 export const getToDos = async () => {
-    const response = await axios.get('http://localhost:8080/todos', {
-      headers : { "Authorization": token, }
-    })
-    if (response.status === 200) {
+    try {
+      const response = await axios.get('http://localhost:8080/todos', {
+        headers : { "Authorization": token, }
+      })
       const data = response.data
       return data
+    } catch(err) {
+      if (axios.isAxiosError(err) && err.response) {
+        alert(err.response);
+      }
     }
-  }
+}
 
 export const postToDos = async (props : IToDo) => {
   await axios.post('http://localhost:8080/todos' , {

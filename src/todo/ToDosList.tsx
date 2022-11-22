@@ -58,7 +58,6 @@ const ToDo = styled.div`
   padding : 5px 10px;
   margin-top: 10px;
   display:flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   border-bottom: 2px solid #d1d3d4;

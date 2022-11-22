@@ -70,7 +70,8 @@ ToDo List
 - React-Query를 사용하여 ToDo API 호출 
 - React-Query의 useMutataion을 사용해서 todo의 CRUD 구현 
 - React.memo를 사용하여 props가 변한 것만 리렌더링 하도록 개선 
-- 기존 fetch를 사용하여 api 호출에서 axios를 사용하여 api를 호출하도록 개선 
+- 기존 fetch를 사용하여 api 호출에서 axios를 사용하여 api를 호출하도록 개선
+- router에 lazy loading을 추가하여 성능 개선 
 
 ## 챌린지를 하면서 느낀 점 
 
