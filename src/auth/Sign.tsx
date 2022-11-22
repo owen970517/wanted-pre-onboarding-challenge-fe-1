@@ -16,7 +16,6 @@ const Sign = () => {
     onSuccess : (data:any) => {
       if (data.message) {
         nav('/login');
-        console.log(data.message);
       }
     }
   })

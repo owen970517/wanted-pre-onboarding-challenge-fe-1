@@ -9,11 +9,8 @@ import { authActions } from '../store/authSlice';
 import LoadingAndError from '../error-loading/LoadingAndError';
 import LoginError from './LoginError';
 import Loginloading from './Loginloading';
+import { IResponse } from '../types/response';
 
-interface IResponse {
-  message : string;
-  token :string;
-}
 
 function Login() {
   const dispatch = useDispatch();
