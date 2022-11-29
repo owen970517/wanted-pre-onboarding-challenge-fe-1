@@ -9,7 +9,7 @@ function Header() {
   const dispatch = useDispatch();
   const nav = useNavigate();
   const onLogOut = () => {
-    localStorage.removeItem('preonboarding');
+    localStorage.removeItem('token');
     dispatch(authActions.logout());
     nav('/login');
   };

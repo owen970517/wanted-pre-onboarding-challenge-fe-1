@@ -24,10 +24,7 @@ function Login() {
     onSuccess : (getData:IResponse) => {
       if(getData.token) {
         localStorage.setItem(
-          'preonboarding',
-          JSON.stringify({
-            token: getData.token
-          }));
+          'token', getData.token);
         dispatch(authActions.login());
         nav('/');  
       }

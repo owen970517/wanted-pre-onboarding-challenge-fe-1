@@ -2,8 +2,6 @@ import axios from "axios";
 import { IToDo } from "./types/todo";
 import { IForm } from "./types/user";
 
-let token = localStorage.getItem('preonboarding') || '';
-
 export const createUser = async (props :IForm) => {
   try {
     const response = await axios.post('http://localhost:8080/users/create', {
@@ -33,6 +31,7 @@ export const postLogin = async (props : IForm) => {
 }
 
 export const getToDos = async () => {
+  const token = localStorage.getItem('token') ? localStorage.getItem('token') : '';
     try {
       const response = await axios.get('http://localhost:8080/todos', {
         headers : { "Authorization": token, }
@@ -41,12 +40,13 @@ export const getToDos = async () => {
       return data
     } catch(err) {
       if (axios.isAxiosError(err) && err.response) {
-        alert(err.response);
+        console.log(err.response.data.details);
       }
     }
 }
 
 export const postToDos = async (props : IToDo) => {
+  const token = localStorage.getItem('token') ? localStorage.getItem('token') : '';
   await axios.post('http://localhost:8080/todos' , {
       title: props.title,
       content: props.content
@@ -59,6 +59,7 @@ export const postToDos = async (props : IToDo) => {
 }
 
 export const deleteToDo = async (id:string) => {
+  const token = localStorage.getItem('token') ? localStorage.getItem('token') : '';
   const ok = window.confirm("정말 삭제하시겠습니까??");
   if (ok) {
     await axios.delete('http://localhost:8080/todos/' + id , {
@@ -71,6 +72,7 @@ export const deleteToDo = async (id:string) => {
 }
 
 export const getToDoById = async (id:string) => {
+  const token = localStorage.getItem('token') ? localStorage.getItem('token') : '';
  try {
     const response = await axios.get('http://localhost:8080/todos/' + id , {
       headers: {
@@ -87,6 +89,7 @@ export const getToDoById = async (id:string) => {
 }
 
 export const modifyToDo = async ( props:IToDo) => {
+  const token = localStorage.getItem('token') ? localStorage.getItem('token') : '';
   const response = await axios.put('http://localhost:8080/todos/' + props.id, {
       title: props.title,
     content: props.content,
