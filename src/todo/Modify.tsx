@@ -10,7 +10,6 @@ const Modify = () => {
     const params = useParams();
     const nav = useNavigate();
     const {data:detailToDo}= useQuery('todo' , () => getToDoById(params.id as string), { notifyOnChangeProps : 'tracked'})
-    console.log(detailToDo);
     const {register , handleSubmit ,setValue ,formState: { errors }} = useForm<IToDo>();
     setValue('title' , detailToDo?.data.title)
     setValue('content' , detailToDo?.data.content)

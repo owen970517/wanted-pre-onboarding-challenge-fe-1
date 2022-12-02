@@ -69,9 +69,10 @@ ToDo List
 - 체크박스를 추가하여 완료한 todo를 알 수 있도록 만듦
 - React-Query를 사용하여 ToDo API 호출 
 - React-Query의 useMutataion을 사용해서 todo의 CRUD 구현 
-- React.memo를 사용하여 props가 변한 것만 리렌더링 하도록 개선 
+- React.memo를 사용하여 modal input 창이 열릴 때 마다 모든 todo가 렌더링 되던 현상을 개선
 - 기존 fetch를 사용하여 api 호출에서 axios를 사용하여 api를 호출하도록 개선
 - router에 lazy loading을 추가하여 성능 개선 
+
 
 ## 챌린지를 하면서 느낀 점 
 
