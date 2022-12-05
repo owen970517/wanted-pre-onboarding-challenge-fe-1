@@ -11,7 +11,7 @@ export const createUser = async (props :IForm) => {
     return await response.data
   } catch (err) {
     if (axios.isAxiosError(err) && err.response) {
-      alert(err.response.data.details);
+      console.log(err.response);
     }
   }
 }
@@ -40,7 +40,7 @@ export const getToDos = async () => {
       return data
     } catch(err) {
       if (axios.isAxiosError(err) && err.response) {
-        console.log(err.response.data.details);
+        console.log(err.response.data.message);
       }
     }
 }

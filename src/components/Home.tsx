@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { IToDo } from '../types/todo';
 import {  getToDos} from '../api';
 import {  useDispatch, useSelector } from 'react-redux';
 import AddToDo from '../todo/AddToDo';
@@ -9,39 +8,39 @@ import { AiOutlinePlusCircle } from "react-icons/ai";
 import { RootState } from '../store/store';
 import ToDosList from '../todo/ToDosList';
 import { useQuery } from 'react-query';
+import { IQuery } from '../types/query';
 
 function Home() {
   const isLogin = useSelector((state:RootState) => state.auth.isLogin);
   const isModal = useSelector((state:RootState) => state.modal.isModal);
   const dispatch = useDispatch();
-  const {data:myToDos , isLoading } = useQuery(['todos'] , getToDos ,{ notifyOnChangeProps: "tracked" });
+  const {data:myToDos } = useQuery<IQuery>(['todos'] , getToDos ,{ notifyOnChangeProps: "tracked" ,suspense : true , useErrorBoundary: true});
   const onModalOpen = () => {
     dispatch(modalActions.open());
   }
   return (
     <>
       {isLogin && 
-        <AddDiv>
-          <AddBtn onClick={onModalOpen}></AddBtn>
-        </AddDiv>
-      }
-      <ToDoBox>
-        {isLoading && <h1>Loading...</h1>}
-        {isLogin ? myToDos?.data.map((todo : IToDo) => {
-          return (
-            <ToDosList key={todo.id} id={todo.id!} title={todo.title} content={todo.content}/>
-          )
-        }) : 
-        <>
-          <h1>로그인을 해야 사용가능합니다.</h1>
-        </>}
-      </ToDoBox>
-      {isModal && 
-      <Background>
-        <ModalContainer>
-          <AddToDo/>
-        </ModalContainer>
-      </Background>}
+          <AddDiv>
+            <AddBtn onClick={onModalOpen}></AddBtn>
+          </AddDiv>
+        }
+        <ToDoBox>
+          {isLogin ? myToDos?.data?.map((todo) => {
+            return (
+              <ToDosList key={todo.id} id={todo.id!} title={todo.title} content={todo.content}/>
+            )
+          }) : 
+          <>
+            <h1>로그인을 해야 사용가능합니다.</h1>
+          </>}
+        </ToDoBox>
+        {isModal && 
+        <Background>
+          <ModalContainer>
+            <AddToDo/>
+          </ModalContainer>
+        </Background>}
     </>
   );
 }
