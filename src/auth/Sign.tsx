@@ -32,11 +32,9 @@ const Sign = () => {
     <LoadingAndError errorFallback={<LoginError/>} loadingFallback={<Loginloading/>}>
         <Wrapper onSubmit={handleSubmit(onSubmit)}>
           <h3>회원가입</h3>
-          {errors.id ? (
             <Input
-              style={{ border: '1px solid red' }}
               {...register('id', {
-                required: true,
+                required: {value : true , message : '아이디를 입력하시오'},
                 maxLength: 30,
                 pattern: {
                   value:
@@ -46,29 +44,13 @@ const Sign = () => {
               })}
               type="text"
               placeholder="아이디"
+              isError ={errors.id ? 'red' : ''}
             ></Input>
-          ) : (
-            <Input
-              {...register('id', {
-                required: true,
-                maxLength: 30,
-                pattern: {
-                  value:
-                    /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i,
-                  message: '올바른 이메일 형식을 입력하시오',
-                },
-              })}
-              type="text"
-              placeholder="아이디"
-            ></Input>
-          )}
           {errors.id && <p style={{ color: 'red' }}>{errors.id.message}</p>}
-          {errors.password ? (
             <Input
-              style={{ border: '1px solid red' }}
               {...register('password', {
-                required: true,
-                minLength: 6,
+                required: {value : true , message : '비밀번호를 입력하시오'},
+                minLength: {value : 7 , message :'7자리 이상 입력하시오'},
                 pattern: {
                   value: /^(?=.*[A-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/,
                   message: '특수문자 , 대문자 , 숫자를 포함하시오',
@@ -76,21 +58,8 @@ const Sign = () => {
               })}
               type="password"
               placeholder="비밀번호"
+              isError ={errors.password ? 'red' : ''}
             ></Input>
-          ) : (
-            <Input
-              {...register('password', {
-                required: true,
-                minLength: 6,
-                pattern: {
-                  value: /^(?=.*[A-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/,
-                  message: '특수문자 , 대문자 , 숫자를 포함하시오',
-                },
-              })}
-              type="password"
-              placeholder="비밀번호"
-            ></Input>
-          )}
           {errors.password && (
             <p style={{ color: 'red' }}>{errors.password.message}</p>
           )}
@@ -107,12 +76,13 @@ const Wrapper = styled.form`
   margin-top: 100px;
 `;
 
-const Input = styled.input`
+const Input = styled.input<{isError : string}>`
   border: 1px solid black;
   margin: 10px 10px;
   width: 500px;
   height: 50px;
   padding: 10px;
+  border-color: ${props => props.isError};
 `;
 
 

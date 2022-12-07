@@ -41,6 +41,7 @@ function Home() {
             <AddToDo/>
           </ModalContainer>
         </Background>}
+        
     </>
   );
 }
