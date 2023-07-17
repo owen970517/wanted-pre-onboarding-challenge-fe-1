@@ -1,5 +1,8 @@
 # 프리온보딩 프론트엔드 챌린지
 
+## 실행화면 
+<img src='https://github.com/owen970517/wanted-pre-onboarding-challenge-fe-1/assets/75247323/93560526-a3dd-406b-8cd9-48f3de8e1524'>
+
 ## 설치 방법 및 실행
 
 - git clone https://github.com/owen970517/wanted-pre-onboarding-challenge-fe-1.git
@@ -55,7 +58,7 @@ ToDo List
 
 - README 작성 및 코드 정리 ☑️ 
 - 설치, 환경설정 및 실행 방법 작성 ☑️ 
-- 최종 구현 화면 이미지/ 동영상으로 제공
+- 최종 구현 화면 이미지/ 동영상으로 제공☑️
 - 폴더 구조 tree 형태로 설명 
 - 과제 진행 시 주안점 
 - 개선 사항

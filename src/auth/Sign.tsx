@@ -16,7 +16,7 @@ const Sign = () => {
     formState: { errors },
   } = useForm<IForm>();
   const CreateUser  = useMutation(createUser , {
-    onSuccess : (data:any)=> {
+    onSuccess : (data)=> {
       alert(data.message);
       nav('/login');
     }
@@ -24,7 +24,7 @@ const Sign = () => {
   const onSubmit = async (props : IForm) => {
     CreateUser.mutate({ id: props.id, password: props.password } , {
       onError : (error:any) => {
-        return error.response.data && error.response.data.details
+        return error?.response?.data && error.response.data.details
       }
     })
   };

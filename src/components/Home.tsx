@@ -49,9 +49,10 @@ const ToDoBox = styled.div`
   background-color: #fff;
   padding: 30px 20px;
   margin-top: 20px;
+  margin : 0 auto;
   border-radius: 10px;
   box-shadow: 0 15px 30px rgba(0,0,0,0.3);
-  width: 100%;
+  width: 70%;
   position: relative;
 `
 

@@ -3,9 +3,10 @@ import styled from 'styled-components';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { authActions } from '../store/authSlice';
+import { RootState } from '../store/store';
 
 function Header() {
-  const isLogin = useSelector((state:any) => state.auth.isLogin);
+  const isLogin = useSelector((state:RootState) => state.auth.isLogin);
   const dispatch = useDispatch();
   const nav = useNavigate();
   const onLogOut = () => {
