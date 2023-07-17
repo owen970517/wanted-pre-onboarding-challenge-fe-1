@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { useMutation, useQuery } from 'react-query';
 import { useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
-import { getToDoById, modifyToDo } from '../api';
+import { getToDoById, modifyToDo } from '../api/api';
 import { IToDo } from '../types/todo';
 
 const Modify = () => {

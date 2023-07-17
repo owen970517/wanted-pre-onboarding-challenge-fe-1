@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import {  getToDos} from '../api';
+import {  getToDos} from '../api/api';
 import {  useDispatch, useSelector } from 'react-redux';
 import AddToDo from '../todo/AddToDo';
 import { modalActions } from '../store/modalSlice';

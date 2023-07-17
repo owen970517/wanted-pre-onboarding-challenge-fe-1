@@ -2,7 +2,7 @@ import React ,{useState}from 'react'
 import { useMutation, useQueryClient } from 'react-query'
 import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
-import { deleteToDo } from '../api'
+import { deleteToDo } from '../api/api'
 import { IToDo } from '../types/todo'
 
 const ToDosList = (props :IToDo) => {

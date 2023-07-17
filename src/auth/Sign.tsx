@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { IForm } from '../types/user';
 import { useMutation } from 'react-query';
-import { createUser } from '../api';
+import { createUser } from '../api/api';
 import LoadingAndError from '../error-loading/LoadingAndError';
 import LoginError from './LoginError';
 import Loginloading from './Loginloading';

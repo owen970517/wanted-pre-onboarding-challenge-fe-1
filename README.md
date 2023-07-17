@@ -3,11 +3,49 @@
 ## 실행화면 
 <img src='https://github.com/owen970517/wanted-pre-onboarding-challenge-fe-1/assets/75247323/93560526-a3dd-406b-8cd9-48f3de8e1524'>
 
-## 설치 방법 및 실행
+## 설치 및 실행 방법
 
 - git clone https://github.com/owen970517/wanted-pre-onboarding-challenge-fe-1.git
 - npm install
 - npm start
+
+## 폴더 구조
+- src
+    │  App.tsx
+    │  index.tsx
+    │  
+    ├─api //API 코드를 모아둔 파일
+    │     api.ts
+    │      
+    ├─components // 핵심 컴포넌트 파일  
+    │     Header.tsx
+    │     Home.tsx     
+    │
+    ├─error-loading // 에러 발생 관련 파일
+    │     ErrorBoundary.tsx
+    │     LoadingAndError.tsx
+    │
+    ├─Router // 라우터 경로 컴포넌트 
+    │      Page.tsx
+    │  
+    ├─store // redux 코드
+    │      authSlice.ts
+    │      modalSlice.ts
+    │      store.ts
+    │   
+    ├─styles // css 코드
+    │      GlobalStyles.ts
+    │      
+    ├─todo // todo 관련 코드
+    │      AddToDo.tsx
+    │      Modify.tsx
+    │      ToDoList.tsx
+    │   
+    └─types // 각 컴포넌트들의 타입 저장 
+           query.ts
+           response.ts
+           todo.ts
+           user.ts
 
 ## 사용한 라이브러리
 
@@ -59,9 +97,8 @@ ToDo List
 - README 작성 및 코드 정리 ☑️ 
 - 설치, 환경설정 및 실행 방법 작성 ☑️ 
 - 최종 구현 화면 이미지/ 동영상으로 제공☑️
-- 폴더 구조 tree 형태로 설명 
-- 과제 진행 시 주안점 
-- 개선 사항
+- 폴더 구조 tree 형태로 설명 ☑️
+- 개선 사항 ☑️
 
 ## 추가로 개선한 점 
 
@@ -79,7 +116,7 @@ ToDo List
 
 ## 챌린지를 하면서 느낀 점 
 
-- 올바른 README 작성과 폴더 설계 방법을 배워 주니어 개발자로서 더 발전할 수 있었습니다. 
+- 올바른 README 작성과 폴더 설계 방법을 배워 주니어 개발자로서 더 성장할 수 있었습니다. 
 - React-Query를 사용하여 useEffect, useState를 사용하지 않아도 되기 때문에 코드의 양이 줄일 수 있었습니다.
 - React-Query에 isloading, isError, isFetching 같은 동작의 상태에 대한 값을 갖고 있어서 해당 기능을 구현하기 편했습니다.
  

@@ -1,6 +1,6 @@
 import axios from "axios";
-import { IToDo } from "./types/todo";
-import { IForm } from "./types/user";
+import { IToDo } from "../types/todo";
+import { IForm } from "../types/user";
 
 export const createUser = async (props :IForm) => {
   try {

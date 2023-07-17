@@ -2,7 +2,7 @@ import React from 'react'
 import { useForm } from 'react-hook-form';
 import { useMutation, useQueryClient } from 'react-query';
 import styled from 'styled-components'
-import { postToDos } from '../api';
+import { postToDos } from '../api/api';
 import { IToDo } from '../types/todo';
 import { GrClose } from "react-icons/gr";
 import { useDispatch } from 'react-redux';
