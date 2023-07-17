@@ -10,7 +10,8 @@
 - npm start
 
 ## 폴더 구조
-- src
+```bash
+src
     │  App.tsx
     │  index.tsx
     │  
@@ -46,7 +47,7 @@
            response.ts
            todo.ts
            user.ts
-
+```
 ## 사용한 라이브러리
 
 - ReactJS
